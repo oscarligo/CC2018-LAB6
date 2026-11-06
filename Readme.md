@@ -32,8 +32,6 @@ cargo run --release -- --capturas
 
 ## Demostración animada
 
-Coloca el GIF de demostración en `assets/demo.gif` para mostrarlo en este espacio:
-
 ![Demostración animada de los shaders procedurales](assets/demo.gif)
 
 ## Cobertura de la rúbrica
