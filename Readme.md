@@ -30,6 +30,12 @@ cargo run --release -- --capturas
 | --- | --- | --- |
 | ![Estrella procedural](capturas/estrella.png) | ![Planeta rocoso](capturas/planeta_rocoso.png) | ![Gigante gaseoso](capturas/gigante_gaseoso.png) |
 
+## Demostración animada
+
+Coloca el GIF de demostración en `assets/demo.gif` para mostrarlo en este espacio:
+
+![Demostración animada de los shaders procedurales](assets/demo.gif)
+
 ## Cobertura de la rúbrica
 
 | Requisito o efecto | Implementación |
