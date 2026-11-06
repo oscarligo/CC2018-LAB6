@@ -1,3 +1,4 @@
+mod capture;
 mod celestial_shaders;
 mod follow_camera;
 mod fragment;
@@ -11,10 +12,10 @@ mod projection;
 mod rasterizer;
 mod render;
 mod rocket_audio;
-pub mod solar_system;
 mod shaders;
 mod ship_effects;
 mod ship_movement;
+pub mod solar_system;
 mod triangle;
 mod uniforms;
 mod vertex;
@@ -25,8 +26,8 @@ use input::InputState;
 use raylib::prelude::*;
 use render::Renderer;
 use rocket_audio::RocketAudio;
-use ship_movement::ShipMovement;
 use shaders::FragmentShader;
+use ship_movement::ShipMovement;
 use solar_system::build_solar_system;
 use std::thread;
 use std::time::Duration;
@@ -40,6 +41,10 @@ const MODEL_PATH: &str = "assets/red_car.obj";
 const FRAME_DELAY: Duration = Duration::from_millis(16);
 
 fn main() {
+    if std::env::args().any(|argument| argument == "--capturas") {
+        capture::generate();
+        return;
+    }
     let (mut window, thread) = raylib::init()
         .size(WINDOW_WIDTH, WINDOW_HEIGHT)
         .title(WINDOW_TITLE)
@@ -80,12 +85,7 @@ fn main() {
         world.draw(&mut renderer, &mut framebuffer, &uniforms);
 
         // Render the 3D object to the framebuffer
-        renderer.render(
-            &mut framebuffer,
-            &uniforms,
-            &mesh,
-            FragmentShader::Material,
-        );
+        renderer.render(&mut framebuffer, &uniforms, &mesh, FragmentShader::Material);
         movement.draw_trail(&mut framebuffer, &uniforms);
         movement.draw_exhaust(&mut framebuffer, &uniforms);
 

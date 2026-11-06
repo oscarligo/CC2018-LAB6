@@ -30,6 +30,9 @@ fn fragment_at(position: Vector2, vertices: [&Vertex; 3], weights: [f32; 3]) -> 
     let object_position = vertices[0].position * corrected[0]
         + vertices[1].position * corrected[1]
         + vertices[2].position * corrected[2];
+    let world_position = vertices[0].transformed_position * corrected[0]
+        + vertices[1].transformed_position * corrected[1]
+        + vertices[2].transformed_position * corrected[2];
     let normal = (vertices[0].transformed_normal * corrected[0]
         + vertices[1].transformed_normal * corrected[1]
         + vertices[2].transformed_normal * corrected[2])
@@ -47,6 +50,7 @@ fn fragment_at(position: Vector2, vertices: [&Vertex; 3], weights: [f32; 3]) -> 
     Fragment {
         position,
         object_position,
+        world_position,
         normal,
         color,
         depth,

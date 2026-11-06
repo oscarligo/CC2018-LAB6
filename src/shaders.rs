@@ -11,7 +11,11 @@ const COLOR_CHANNEL_MAX: f32 = 255.0;
 #[derive(Clone, Copy)]
 pub enum FragmentShader {
     Material,
-    Celestial { kind: CelestialKind, time: f32 },
+    Celestial {
+        kind: CelestialKind,
+        time: f32,
+        camera_pos: Vector3,
+    },
 }
 
 fn multiply_matrix_vector4(matrix: &Matrix, vector: &Vector4) -> Vector4 {
@@ -45,8 +49,13 @@ pub fn fragment_shader(
     materials: &[Material],
     shader: FragmentShader,
 ) -> Option<Vector3> {
-    if let FragmentShader::Celestial { kind, time } = shader {
-        return Some(celestial_shaders::shade(kind, fragment, time));
+    if let FragmentShader::Celestial {
+        kind,
+        time,
+        camera_pos,
+    } = shader
+    {
+        return Some(celestial_shaders::shade(kind, fragment, time, camera_pos));
     }
     let Some(texture) = materials
         .get(fragment.material_index)

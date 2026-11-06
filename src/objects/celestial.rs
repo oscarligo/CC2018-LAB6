@@ -80,6 +80,7 @@ impl WorldObject for CelestialBody {
             FragmentShader::Celestial {
                 kind: self.kind,
                 time: self.time,
+                camera_pos: uniforms.camera_pos,
             },
         );
     }
